@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zencraft Labs | Professional Zendesk Apps</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        :root { --primary: #00a651; --primary-hover: #008541; }
+        
+        body { 
+            background-color: #f4f7f6; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
+
+        /* Hero Section */
+        .hero { 
+            text-align: center; 
+            padding: 5rem 0; 
+            background: white; 
+            border-bottom: 1px solid #e1e4e8; 
+        }
+
+        .logo { 
+            max-height: 100px; 
+            margin-bottom: 1.5rem; 
+        }
+
+        /* Main Content Spacing */
+        .content { 
+            flex: 1; 
+            padding: 4rem 1.5rem; 
+        }
+
+        /* Project Card Styling - matching validator.html */
+        .project-card { 
+            background: #ffffff; 
+            padding: 2.5rem; 
+            border-radius: 12px; 
+            border: 1px solid #e1e4e8; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            margin-top: 1rem;
+        }
+
+        h2 { margin-bottom: 1.5rem; }
+
+        footer { 
+            padding: 2rem 0; 
+            border-top: 1px solid #e1e4e8; 
+            background: white; 
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <img src="logo.png" alt="Zencraft Labs Logo" class="logo">
+            <h1>Zencraft Labs</h1>
+            <p>Crafting high-performance tools for the Zendesk ecosystem.</p>
+        </div>
+    </header>
+
+    <main class="container content">
+        <div class="grid">
+            <section>
+                <h2>About Zencraft Labs</h2>
+                <p>We are a dedicated studio focused on data integrity and productivity enhancements. We build smart, lightweight software solutions that optimize support workflows without compromising privacy.</p>
+                <p>Our tools are designed to work natively within Zendesk, ensuring a seamless experience for agents and admins alike.</p>
+            </section>
+            
+            <section>
+                <h2>Our Portfolio</h2>
+                <div class="project-card">
+                    <h3>Field Validator</h3>
+                    <p>Professional Data Integrity: Enforce standards with advanced regex validation for custom ticket fields.</p>
+                    <a href="validator.html" role="button" class="outline">View Examples & Docs</a>
+                </div>
+            </section>
+        </div>
+        
+        <hr style="margin: 4rem 0;">
+        
+        <section style="text-align: center;">
+            <h2>Custom Solutions</h2>
+            <p>Looking for a bespoke integration or a specific tool for your Zendesk instance?</p>
+            <a href="mailto:zencraft.labs@gmail.com" role="button">Contact our Experts</a>
+        </section>
+    </main>
+
+    <footer class="container-fluid">
+        <div class="container">
+            <nav>
+                <ul><li>© 2026 Zencraft Labs</li></ul>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
