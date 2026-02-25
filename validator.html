@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Field Validator | Zencraft Labs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        :root { --primary: #00a651; --primary-hover: #008541; }
+        
+        body { background-color: #f4f7f6; }
+
+        .hero { 
+            text-align: center; 
+            padding: 4rem 0; 
+            background: white; 
+            border-bottom: 1px solid #e1e4e8; 
+        }
+
+        /* Styling für das neue App-Logo */
+        .app-logo {
+            max-height: 120px;
+            width: auto;
+            margin: 1.5rem 0;
+        }
+
+        .content-area { 
+            padding: 4rem 1.5rem; 
+        }
+
+        .example-card { 
+            background: #ffffff; 
+            padding: 2rem; 
+            border-radius: 12px; 
+            border: 1px solid #e1e4e8; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            height: 100%; 
+        }
+
+        .grid {
+            gap: 2.5rem; 
+            margin-bottom: 2.5rem;
+        }
+
+        code { 
+            background: #f8f9fa; 
+            color: #d63384; 
+            padding: 0.5rem 0.8rem; 
+            border-radius: 6px; 
+            font-size: 0.95rem;
+            display: inline-block;
+            margin: 1rem 0;
+            border: 1px solid #eee;
+        }
+
+        h2 { margin-top: 4rem; margin-bottom: 2rem; }
+        h4 { margin-bottom: 0.75rem; color: #1a1e23; }
+        
+        .back-link { 
+            margin-bottom: 3rem; 
+            display: inline-block; 
+            font-weight: 500;
+        }
+
+        pre {
+            background: #1a1e23;
+            color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 1.5rem;
+        }
+        pre code { background: transparent; border: none; color: inherit; padding: 0; }
+
+        footer { padding: 4rem 0; }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1>Field Validator</h1>
+            
+            <img src="logo_field_validator_full.png" alt="Field Validator Logo" class="app-logo">
+            
+            <p><strong>Professional Data Integrity: Advanced Regex Validation for Zendesk.</strong></p>
+        </div>
+    </header>
+
+    <main class="container content-area">
+        <a href="index.html" class="back-link">← Back to Zencraft Labs</a>
+
+        <section>
+            <h2>Common Validation Examples</h2>
+            <p>Maintain high data quality by implementing these validation patterns in your app configuration.</p>
+            
+            <div class="grid">
+                <div class="example-card">
+                    <h4>Custom ID (AAA-123)</h4>
+                    <code>^[A-Z]{3}-[0-9]{3}$</code>
+                    <p><small>Perfect for internal reference numbers, hardware tags, or standardized project IDs.</small></p>
+                </div>
+                <div class="example-card">
+                    <h4>Birth Date</h4>
+                    <code>^\d{2}\.\d{2}\.\d{4}$</code>
+                    <p><small>Validates the standard European format: DD.MM.YYYY</small></p>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="example-card">
+                    <h4>IBAN</h4>
+                    <code>^[A-Z]{2}[0-9]{2}[A-Z0-9]{12,30}$</code>
+                    <p><small>Ensures the correct length and structure of international bank account numbers.</small></p>
+                </div>
+                <div class="example-card">
+                    <h4>Phone Number</h4>
+                    <code>^\+?[0-9\s\-]{7,15}$</code>
+                    <p><small>Supports international formats including leading "+" and common separators.</small></p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Configuration</h2>
+            <p>To apply these rules, update the <code>rulesJson</code> parameter in your Zendesk App Settings:</p>
+            <pre><code>[
+  {
+    "fieldId": "12345",
+    "regexPattern": "^[0-9]+$",
+    "errorMessage": {
+      "en": "Numbers only",
+      "de": "Bitte nur Zahlen eingeben"
+    }
+  }
+]</code></pre>
+        </section>
+    </main>
+
+    <footer class="container">
+        <hr>
+        <small>© 2026 Zencraft Labs</small>
+    </footer>
+</body>
+</html>
