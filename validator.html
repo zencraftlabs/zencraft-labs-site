@@ -1,144 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Field Validator | Zencraft Labs</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <style>
-        :root { --primary: #00a651; --primary-hover: #008541; }
-        
-        body { background-color: #f4f7f6; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .hero { 
-            text-align: center; 
-            padding: 4rem 0; 
-            background: white; 
-            border-bottom: 1px solid #e1e4e8; 
-        }
+<title>Field Validator for Zendesk | Zencraft Labs</title>
+<meta name="description" content="Validate Zendesk ticket fields with regex. Block invalid submissions and ensure consistent, high-quality data.">
 
-        /* Styling für das neue App-Logo */
-        .app-logo {
-            max-height: 120px;
-            width: auto;
-            margin: 1.5rem 0;
-        }
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J6EWDES3YQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-J6EWDES3YQ');
+</script>
 
-        .content-area { 
-            padding: 4rem 1.5rem; 
-        }
+<link rel="icon" href="favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 
-        .example-card { 
-            background: #ffffff; 
-            padding: 2rem; 
-            border-radius: 12px; 
-            border: 1px solid #e1e4e8; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-            height: 100%; 
-        }
+<style>
+:root { --primary:#00a651; --primary-hover:#008541; }
+body{ background:#f4f7f6; }
 
-        .grid {
-            gap: 2.5rem; 
-            margin-bottom: 2.5rem;
-        }
+.hero{
+text-align:center;
+padding:4rem 0;
+background:white;
+border-bottom:1px solid #e1e4e8;
+}
 
-        code { 
-            background: #f8f9fa; 
-            color: #d63384; 
-            padding: 0.5rem 0.8rem; 
-            border-radius: 6px; 
-            font-size: 0.95rem;
-            display: inline-block;
-            margin: 1rem 0;
-            border: 1px solid #eee;
-        }
+.app-logo{
+max-height:120px;
+margin:1.5rem 0;
+}
 
-        h2 { margin-top: 4rem; margin-bottom: 2rem; }
-        h4 { margin-bottom: 0.75rem; color: #1a1e23; }
-        
-        .back-link { 
-            margin-bottom: 3rem; 
-            display: inline-block; 
-            font-weight: 500;
-        }
+.tagline{
+font-size:1.2rem;
+max-width:780px;
+margin:auto;
+opacity:.9;
+}
 
-        pre {
-            background: #1a1e23;
-            color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin-top: 1.5rem;
-        }
-        pre code { background: transparent; border: none; color: inherit; padding: 0; }
+.screenshot{
+margin-top:2rem;
+border-radius:14px;
+border:1px solid #e1e4e8;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+width:100%;
+max-width:1000px;
+}
 
-        footer { padding: 4rem 0; }
-    </style>
+.section{ padding:4rem 0; }
+
+.feature-card{
+background:white;
+padding:2rem;
+border-radius:12px;
+border:1px solid #e1e4e8;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+height:100%;
+}
+
+.grid{ gap:2rem; }
+
+.examples-grid{
+display:grid;
+grid-template-columns:repeat(2, minmax(0, 1fr));
+gap:2rem;
+}
+
+@media (max-width: 800px){
+.examples-grid{ grid-template-columns:1fr; }
+}
+
+.valid{ color:#1c7c3c; font-weight:600; }
+.invalid{ color:#c92a2a; font-weight:600; }
+
+pre{
+background:#1a1e23;
+color:#f8f9fa;
+padding:1.5rem;
+border-radius:10px;
+overflow-x:auto;
+border:1px solid #0f1216;
+}
+
+pre code{
+background:transparent;
+border:none;
+color:inherit;
+padding:0;
+margin:0;
+display:block;
+white-space:pre;
+}
+
+code{
+background:#f8f9fa;
+color:#d63384;
+padding:0.4rem 0.7rem;
+border-radius:6px;
+border:1px solid #eee;
+display:inline-block;
+}
+
+footer{ padding:4rem 0; }
+</style>
 </head>
+
 <body>
-    <header class="hero">
-        <div class="container">
-            <h1>Field Validator</h1>
-            
-            <img src="logo_field_validator_full.png" alt="Field Validator Logo" class="app-logo">
-            
-            <p><strong>Professional Data Integrity: Advanced Regex Validation for Zendesk.</strong></p>
-        </div>
-    </header>
 
-    <main class="container content-area">
-        <a href="index.html" class="back-link">← Back to Zencraft Labs</a>
+<header class="hero">
+<div class="container">
 
-        <section>
-            <h2>Common Validation Examples</h2>
-            <p>Maintain high data quality by implementing these validation patterns in your app configuration.</p>
-            
-            <div class="grid">
-                <div class="example-card">
-                    <h4>Custom ID (AAA-123)</h4>
-                    <code>^[A-Z]{3}-[0-9]{3}$</code>
-                    <p><small>Perfect for internal reference numbers, hardware tags, or standardized project IDs.</small></p>
-                </div>
-                <div class="example-card">
-                    <h4>Birth Date</h4>
-                    <code>^\d{2}\.\d{2}\.\d{4}$</code>
-                    <p><small>Validates the standard European format: DD.MM.YYYY</small></p>
-                </div>
-            </div>
+<h1>Field Validator</h1>
 
-            <div class="grid">
-                <div class="example-card">
-                    <h4>IBAN</h4>
-                    <code>^[A-Z]{2}[0-9]{2}[A-Z0-9]{12,30}$</code>
-                    <p><small>Ensures the correct length and structure of international bank account numbers.</small></p>
-                </div>
-                <div class="example-card">
-                    <h4>Phone Number</h4>
-                    <code>^\+?[0-9\s\-]{7,15}$</code>
-                    <p><small>Supports international formats including leading "+" and common separators.</small></p>
-                </div>
-            </div>
-        </section>
+<img src="logo_field_validator_full.png" class="app-logo" alt="Field Validator Logo">
 
-        <section>
-            <h2>Configuration</h2>
-            <p>To apply these rules, update the <code>rulesJson</code> parameter in your Zendesk App Settings:</p>
-            <pre><code>[
+<p class="tagline">
+Validate Zendesk ticket fields using regex rules.
+Block invalid submissions, enforce structured data, and keep your support data clean.
+</p>
+
+<img src="assets/field-validator-in-action.png" class="screenshot"
+alt="Field Validator app validating Zendesk ticket">
+
+<p><small>
+Screenshot file must be stored at <strong>/assets/field-validator-in-action.png</strong>
+</small></p>
+
+</div>
+</header>
+
+<main class="container">
+
+<section class="section">
+<h2>Why Field Validator?</h2>
+
+<div class="grid">
+
+<div class="feature-card">
+<h4>Prevent Bad Data</h4>
+<p>Stop tickets from being saved when field values do not match your rules.</p>
+</div>
+
+<div class="feature-card">
+<h4>Regex Powered</h4>
+<p>Use JavaScript regex patterns to validate emails, IDs, numbers, IBAN, and more.</p>
+</div>
+
+<div class="feature-card">
+<h4>Validates on Save</h4>
+<p>Validation runs when agents save or submit a ticket. No workflow changes required.</p>
+</div>
+
+<div class="feature-card">
+<h4>Multilingual Messages</h4>
+<p>Show localized error messages depending on the agent language, with fallback to English.</p>
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<h2>Example Use Cases</h2>
+
+<ul>
+<li>Require valid customer email</li>
+<li>Ensure invoice numbers follow a strict company format</li>
+<li>Validate IBAN or bank account fields</li>
+<li>Allow only numeric customer IDs</li>
+<li>Enforce internal ticket codes like SUP-123</li>
+</ul>
+
+</section>
+
+<section class="section">
+
+<h2>Example Validation Rules</h2>
+
+<p>
+Need help building regex?
+<a href="https://regex101.com/" target="_blank" rel="noopener">regex101</a> or
+<a href="https://regexr.com/" target="_blank" rel="noopener">RegExr</a>
+</p>
+
+<div class="examples-grid">
+
+<div class="feature-card">
+<h4>Email Address</h4>
+<code>^[^\s@]+@[^\s@]+\.[^\s@]+$</code>
+<p>
+<span class="valid">Valid:</span> john@company.com<br>
+<span class="invalid">Invalid:</span> john@company , john@@company.com
+</p>
+</div>
+
+<div class="feature-card">
+<h4>IBAN</h4>
+<code>^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$</code>
+<p>
+<span class="valid">Valid:</span> CH9300762011623852957<br>
+<span class="invalid">Invalid:</span> CH93-0076 , 9300
+</p>
+</div>
+
+<div class="feature-card">
+<h4>Price (decimal)</h4>
+<code>^\d+(\.\d{1,2})?$</code>
+<p>
+<span class="valid">Valid:</span> 10 , 19.90<br>
+<span class="invalid">Invalid:</span> 19,90 , CHF 10 , 10.999
+</p>
+</div>
+
+<div class="feature-card">
+<h4>Customer Number</h4>
+<code>^[0-9]{4,10}$</code>
+<p>
+<span class="valid">Valid:</span> 482913<br>
+<span class="invalid">Invalid:</span> CUST-123 , 12A34
+</p>
+</div>
+
+<div class="feature-card">
+<h4>Internal Ticket Code</h4>
+<code>^[A-Z]{3}-[0-9]{3,6}$</code>
+<p>
+<span class="valid">Valid:</span> SUP-123 , DEV-48291<br>
+<span class="invalid">Invalid:</span> sup-123 , SUP123
+</p>
+</div>
+
+<div class="feature-card">
+<h4>European Date</h4>
+<code>^\d{2}\.\d{2}\.\d{4}$</code>
+<p>
+<span class="valid">Valid:</span> 31.12.2026<br>
+<span class="invalid">Invalid:</span> 2026-12-31 , 31/12/2026
+</p>
+</div>
+
+<div class="feature-card">
+<h4>Phone Number</h4>
+<code>^\+?[0-9\s\-]{7,15}$</code>
+<p>
+<span class="valid">Valid:</span> +41 79 123 45 67<br>
+<span class="invalid">Invalid:</span> Phone123 , ++41
+</p>
+</div>
+
+<div class="feature-card">
+<h4>ZIP / Postal Code</h4>
+<code>^[0-9]{4,6}$</code>
+<p>
+<span class="valid">Valid:</span> 8001 , 10115<br>
+<span class="invalid">Invalid:</span> CH-8001 , 80A1
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section">
+
+<h2>Configuration</h2>
+
+<p>Paste your rules into the <code>rulesJson</code> setting in Zendesk:</p>
+
+<pre><code>[
   {
-    "fieldId": "12345",
-    "regexPattern": "^[0-9]+$",
+    "fieldId": "33604067489298",
+    "regexPattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
     "errorMessage": {
-      "en": "Numbers only",
-      "de": "Bitte nur Zahlen eingeben"
+      "en": "Please enter a valid email address",
+      "de": "Bitte eine gültige E-Mail-Adresse eingeben"
+    }
+  },
+  {
+    "fieldId": "33604039829010",
+    "regexPattern": "^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$",
+    "errorMessage": {
+      "en": "Please enter a valid IBAN (e.g. CH9300762011623852957)",
+      "de": "Bitte eine gültige IBAN eingeben (z.B. CH9300762011623852957)"
+    }
+  },
+  {
+    "fieldId": "33604056649874",
+    "regexPattern": "^\\d+(\\.\\d{1,2})?$",
+    "errorMessage": {
+      "en": "Please enter a valid price (e.g. 10 or 10.50)",
+      "de": "Bitte einen gültigen Preis eingeben (z.B. 10 oder 10.50)"
     }
   }
 ]</code></pre>
-        </section>
-    </main>
 
-    <footer class="container">
-        <hr>
-        <small>© 2026 Zencraft Labs</small>
-    </footer>
+<p><small>
+Validation happens on ticket save. Empty fields are ignored unless required by Zendesk.
+</small></p>
+
+</section>
+
+<section class="section">
+<h2>About</h2>
+<p>Built by Zencraft Labs. Designed for teams that need consistent, structured Zendesk ticket data.</p>
+</section>
+
+</main>
+
+<footer class="container">
+<hr>
+<small>© 2026 Zencraft Labs</small>
+</footer>
+
 </body>
 </html>
